@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: load-runner
+    template: load-runner
+  name: load-runner
+spec:
+  replicas: 1
+  selector:
+    app: load-runner
+    deploymentconfig: load-runner
+  template:
+    metadata:
+      labels:
+        app: load-runner
+        deploymentconfig: load-runner
+    spec:
+      containers:
+      - image: registry.alauda.cn/guolsh/load-runner:v1
+        imagePullPolicy: IfNotPresent
+        name: load-runner
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: 
+          requests:
+            cpu: 100m
+status: {}
